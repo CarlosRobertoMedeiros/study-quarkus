@@ -21,10 +21,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import javax.annotation.security.RolesAllowed;
+
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
+import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
 import br.com.roberto.ifood.cadastro.dto.AdicionarPratoDto;
 import br.com.roberto.ifood.cadastro.dto.AdicionarRestauranteDto;
@@ -39,7 +46,11 @@ import br.com.roberto.ifood.cadastro.infra.ConstraintViolationResponse;
 @Path("/restaurantes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Tag(name = "restaurante") //Obs usando mais tag você duplica o local onde quer disponibilizar a funcionalidade 
+@Tag(name = "restaurante") //Obs usando mais tag você duplica o local onde quer disponibilizar a funcionalidade
+@RolesAllowed("proprietario")
+@SecurityScheme(securitySchemeName = "ifood-oauth", type = SecuritySchemeType.OAUTH2, 
+	flows = @OAuthFlows(password = @OAuthFlow(tokenUrl = "http://localhost:8180/auth/realms/ifood/protocol/openid-connect/token")))
+@SecurityRequirement(name="ifood-oauth", scopes = {})
 public class RestauranteResource {
 
 	@Inject
@@ -167,4 +178,4 @@ public class RestauranteResource {
 
 //TODO: Continuar Daqui
 //Adicionando KeyCloak
-//https://www.udemy.com/course/des-web-quarkus/learn/lecture/19192842#announcements
+//https://www.udemy.com/course/des-web-quarkus/learn/lecture/19192844#announcements
