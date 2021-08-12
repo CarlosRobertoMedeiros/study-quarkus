@@ -22,10 +22,14 @@
 		In a second terminal, inside iFood Project run:
 			mvn quarkus:dev
 			
-		KeyCloak  Link: http://localhost:8180/auth/
-		Jaeger-ui Link: http://localhost:16686/search
-		
-		
+		KeyCloak   Link: http://localhost:8180/auth/
+		Jaeger-ui  Link: http://localhost:16686/search
+		*Prometheus Link: http://localhost:9090/graph
+		*Grafana Link: http://localhost:3000/login 
+			user: admin 
+			pass: admin  
+			Capturing according from Prometheus for Datasource
+			Later I create my dashboard
 
 	#Back End
 		
