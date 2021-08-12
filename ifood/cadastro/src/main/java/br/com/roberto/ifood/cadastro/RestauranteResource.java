@@ -23,6 +23,10 @@ import javax.ws.rs.core.Response.Status;
 
 import javax.annotation.security.RolesAllowed;
 
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Gauge;
+import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -60,6 +64,10 @@ public class RestauranteResource {
     PratoMapper pratoMapper;
 	
 	@GET
+	@Counted(name = "Quantidade buscas Restaurantes") //Metrics
+	@SimplyTimed(name = "Tempo Simples de Busca")
+	@Timed(name="Tempo Completo de Busca")
+	//@Gauge() Consulta de tempos em tempos
     public List<RestauranteDto> buscar() {
         Stream<Restaurante> restaurantes =  Restaurante.streamAll();
 		return restaurantes
