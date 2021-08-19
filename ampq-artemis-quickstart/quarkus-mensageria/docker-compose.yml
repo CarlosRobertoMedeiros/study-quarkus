@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+ 
+  artemis_ifood:
+    container_name: artemis-ifood
+    image: vromero/activemq-artemis:latest-alpine
+    ports:
+      - 5672:5672
+      - 8161:8161
+      - 61616:61616
+    environment:
+      ARTEMIS_USERNAME: admin
+      ARTEMIS_PASSWORD: admin
+

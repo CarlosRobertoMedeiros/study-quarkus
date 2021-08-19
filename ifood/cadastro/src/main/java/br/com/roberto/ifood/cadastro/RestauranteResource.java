@@ -5,7 +5,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.security.RolesAllowed;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -21,21 +25,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import javax.annotation.security.RolesAllowed;
-
 import org.eclipse.microprofile.metrics.annotation.Counted;
-import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
 
 import br.com.roberto.ifood.cadastro.dto.AdicionarPratoDto;
 import br.com.roberto.ifood.cadastro.dto.AdicionarRestauranteDto;
@@ -47,6 +50,7 @@ import br.com.roberto.ifood.cadastro.dto.RestauranteDto;
 import br.com.roberto.ifood.cadastro.dto.RestauranteMapper;
 import br.com.roberto.ifood.cadastro.infra.ConstraintViolationResponse;
 
+
 @Path("/restaurantes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -55,6 +59,7 @@ import br.com.roberto.ifood.cadastro.infra.ConstraintViolationResponse;
 @SecurityScheme(securitySchemeName = "ifood-oauth", type = SecuritySchemeType.OAUTH2, 
 	flows = @OAuthFlows(password = @OAuthFlow(tokenUrl = "http://localhost:8180/auth/realms/ifood/protocol/openid-connect/token")))
 @SecurityRequirement(name="ifood-oauth", scopes = {})
+@ApplicationScoped
 public class RestauranteResource {
 
 	@Inject
@@ -63,7 +68,12 @@ public class RestauranteResource {
     @Inject
     PratoMapper pratoMapper;
 	
-	@GET
+	//Usado para 
+    @Inject
+	@Channel("restaurante")
+	Emitter<String> emitter;
+    
+    @GET
 	@Counted(name = "Quantidade buscas Restaurantes") //Metrics
 	@SimplyTimed(name = "Tempo Simples de Busca")
 	@Timed(name="Tempo Completo de Busca")
@@ -81,6 +91,11 @@ public class RestauranteResource {
     @APIResponse(responseCode = "400", content = @Content(schema = @Schema(allOf = ConstraintViolationResponse.class)))
     public Response adicionar(@Valid AdicionarRestauranteDto dto) {
     	Restaurante restaurante = restauranteMapper.toRestaurante(dto);
+    	
+    	Jsonb create = JsonbBuilder.create();
+    	String json = create.toJson(restaurante);
+    	emitter.send(json);
+    	
     	restaurante.persist();
     	return Response.status(Status.CREATED).build();
     }
