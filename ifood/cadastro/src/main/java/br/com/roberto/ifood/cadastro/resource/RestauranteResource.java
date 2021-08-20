@@ -82,9 +82,8 @@ public class RestauranteResource implements RestauranteResourceOpenApi {
     @Transactional
     public Response adicionar(@Valid AdicionarRestauranteDto dto) {
     	Restaurante restaurante = restauranteMapper.toRestaurante(dto);
-
-    	restauranteProducer.send(restaurante);
     	
+    	restauranteProducer.send(restaurante);
     	restaurante.persist();
     	return Response.status(Status.CREATED).build();
     }

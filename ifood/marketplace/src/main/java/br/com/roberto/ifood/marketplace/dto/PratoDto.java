@@ -1,4 +1,4 @@
-package br.com.roberto.ifood.marketplace;
+package br.com.roberto.ifood.marketplace.dto;
 
 import java.math.BigDecimal;
 

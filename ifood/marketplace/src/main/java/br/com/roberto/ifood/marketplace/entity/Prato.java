@@ -1,7 +1,8 @@
-package br.com.roberto.ifood.marketplace;
+package br.com.roberto.ifood.marketplace.entity;
 
 import java.math.BigDecimal;
 
+import br.com.roberto.ifood.marketplace.dto.PratoDto;
 import io.smallrye.mutiny.Multi;
 import io.vertx.mutiny.pgclient.PgPool;
 import io.vertx.mutiny.sqlclient.Row;

@@ -1,4 +1,4 @@
-package br.com.roberto.ifood.marketplace;
+package br.com.roberto.ifood.marketplace.resource;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -12,6 +12,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
+import br.com.roberto.ifood.marketplace.dto.PratoDto;
+import br.com.roberto.ifood.marketplace.entity.Prato;
 import io.smallrye.mutiny.Multi;
 import io.vertx.mutiny.pgclient.PgPool;
 

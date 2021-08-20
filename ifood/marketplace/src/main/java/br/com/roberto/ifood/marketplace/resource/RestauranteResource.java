@@ -1,4 +1,4 @@
-package br.com.roberto.ifood.marketplace;
+package br.com.roberto.ifood.marketplace.resource;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -8,6 +8,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.com.roberto.ifood.marketplace.dto.PratoDto;
+import br.com.roberto.ifood.marketplace.entity.Prato;
 import io.smallrye.mutiny.Multi;
 import io.vertx.mutiny.pgclient.PgPool;
 

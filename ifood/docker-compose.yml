@@ -59,5 +59,6 @@ services:
       ARTEMIS_PASSWORD: admin
     ports:
       - 8161:8161
+      - 5672:5672
       - 61616:61616
 
