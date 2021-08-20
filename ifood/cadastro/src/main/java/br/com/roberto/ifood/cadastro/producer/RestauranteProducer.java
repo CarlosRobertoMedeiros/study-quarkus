@@ -1,4 +1,4 @@
-package br.com.roberto.producer;
+package br.com.roberto.ifood.cadastro.producer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -6,29 +6,28 @@ import javax.inject.Inject;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 
-import br.com.roberto.model.Movie;
+import br.com.roberto.ifood.cadastro.entity.Restaurante;
 
 @ApplicationScoped
-public class MovieProducer {
+public class RestauranteProducer {
 	
 	@Inject
-	@Channel("movies-out")
-	Emitter<Movie> emitter;
+	@Channel("restaurante-out")
+	Emitter<Restaurante> emitter;
 	
-	public void send(Movie movie) {
-		emitter.send(movie)
+	public void send(Restaurante restaurante) {
+		emitter.send(restaurante)
 			.whenComplete((sucesso, falha) ->{
 				if (falha!=null) {
 					System.out.println("Falha "+falha.getMessage());
 				}else {
 					System.out.println("------------------------------");
-					System.out.println(movie);
-					System.out.println("Mensagem Enviada com Sucesso !");
+					System.out.println(restaurante);
+					System.out.println("Restaurante Enviado com Sucesso !");
 					System.out.println("------------------------------");
 				}
 			});
 	}
-	
 	
 
 }

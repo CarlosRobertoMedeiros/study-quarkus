@@ -13,6 +13,7 @@ import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
 
 import br.com.roberto.ifood.cadastro.dto.AtualizarRestauranteDto;
+import br.com.roberto.ifood.cadastro.entity.Restaurante;
 import br.com.roberto.ifood.cadastro.util.TokenUtils;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;

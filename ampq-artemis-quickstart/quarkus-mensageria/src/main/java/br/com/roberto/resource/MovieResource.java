@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import br.com.roberto.model.Movie;
 import br.com.roberto.producer.MovieProducer;
 
-@Path("/moovie")
+@Path("/movie")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class MovieResource {

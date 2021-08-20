@@ -3,7 +3,7 @@ package br.com.roberto.ifood.cadastro.dto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
-import br.com.roberto.ifood.cadastro.Prato;
+import br.com.roberto.ifood.cadastro.entity.Prato;
 
 @Mapper(componentModel = "cdi")
 public interface PratoMapper {

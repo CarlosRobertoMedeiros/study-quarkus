@@ -2,12 +2,15 @@ package br.com.roberto.converter;
 
 import java.lang.reflect.Type;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.eclipse.microprofile.reactive.messaging.Message;
 
 import io.smallrye.reactive.messaging.MessageConverter;
 import io.smallrye.reactive.messaging.amqp.IncomingAmqpMetadata;
 import io.vertx.core.json.JsonObject;
 
+@ApplicationScoped
 public class JsonToObjectConverter implements MessageConverter {
 
 	@Override

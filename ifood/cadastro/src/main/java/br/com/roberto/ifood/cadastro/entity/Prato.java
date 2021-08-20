@@ -1,4 +1,4 @@
-package br.com.roberto.ifood.cadastro;
+package br.com.roberto.ifood.cadastro.entity;
 
 import java.math.BigDecimal;
 

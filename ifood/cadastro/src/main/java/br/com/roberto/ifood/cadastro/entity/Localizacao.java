@@ -1,4 +1,4 @@
-package br.com.roberto.ifood.cadastro;
+package br.com.roberto.ifood.cadastro.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

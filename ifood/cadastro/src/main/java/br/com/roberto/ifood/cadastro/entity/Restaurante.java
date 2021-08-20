@@ -1,4 +1,4 @@
-package br.com.roberto.ifood.cadastro;
+package br.com.roberto.ifood.cadastro.entity;
 
 import java.util.Date;
 
@@ -40,6 +40,14 @@ public class Restaurante extends PanacheEntityBase {
 	 	@UpdateTimestamp
 	 	@Schema(hidden = true)
 	 	public Date dataAtualizacao;
+
+		@Override
+		public String toString() {
+			return "Restaurante [id=" + id + ", proprietario=" + proprietario + ", cnpj=" + cnpj + ", nome=" + nome
+					+ ", localizacao=" + localizacao + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
+					+ dataAtualizacao + "]";
+		}
+	 	
 	 	
 	 	
 	 	

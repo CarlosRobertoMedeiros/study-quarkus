@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import br.com.roberto.ifood.cadastro.Restaurante;
+import br.com.roberto.ifood.cadastro.entity.Restaurante;
 import br.com.roberto.ifood.cadastro.infra.Dto;
 import br.com.roberto.ifood.cadastro.infra.ValidDto;
 
