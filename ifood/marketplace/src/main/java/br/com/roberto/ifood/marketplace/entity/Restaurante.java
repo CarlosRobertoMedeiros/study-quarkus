@@ -8,7 +8,7 @@ public class Restaurante {
 	
 	public Long id;
 	public String nome;
-	private Localizacao localizacao;
+	public Localizacao localizacao;
 	
 	@Override
 	public String toString() {

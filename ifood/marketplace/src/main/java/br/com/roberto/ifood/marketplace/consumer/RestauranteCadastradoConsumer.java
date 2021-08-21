@@ -25,7 +25,7 @@ public class RestauranteCadastradoConsumer {
 		System.out.println("Mensagem do Consumidor");
 		System.out.println("------------------------------");
 		
-		//restaurante.persist(client);
+		restaurante.persist(client);
 	}
 
 
