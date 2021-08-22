@@ -34,7 +34,11 @@
 		
 		Artemis Broker Link: http://127.0.0.1:8161/console/login
 			user: admin 
-			pass: admin 
+			pass: admin
+	
+		Kafka Web com kafdrop_container Link: http://localhost:9000/
+		
+		
 
 	#Back End
 		

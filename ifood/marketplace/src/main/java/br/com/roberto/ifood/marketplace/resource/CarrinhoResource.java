@@ -12,6 +12,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+
 import br.com.roberto.ifood.marketplace.dto.PedidoRealizadoDto;
 import br.com.roberto.ifood.marketplace.dto.PratoDto;
 import br.com.roberto.ifood.marketplace.dto.PratoPedidoDto;
@@ -30,6 +33,11 @@ public class CarrinhoResource {
 
 	@Inject
 	PgPool client;
+	
+	@Inject
+	@Channel("pedidos")
+	Emitter<PedidoRealizadoDto> emitterPedido;
+	
 
 	@GET
 	public Uni<List<PratoCarrinho>> buscarCarrinho() {
@@ -54,6 +62,7 @@ public class CarrinhoResource {
 		String cliente = CLIENTE;
 		pedido.cliente = cliente;
 		List<PratoCarrinho> pratoCarrinho = PratoCarrinho.findCarrinho(client, cliente).await().indefinitely();
+		
 		// Utilizar mapstruts
 		List<PratoPedidoDto> pratos = pratoCarrinho.stream().map(pc -> from(pc)).collect(Collectors.toList());
 		pedido.pratos = pratos;
@@ -61,7 +70,7 @@ public class CarrinhoResource {
 		RestauranteDto restaurante = new RestauranteDto();
 		restaurante.nome = "nome restaurante";
 		pedido.restaurante = restaurante;
-		//emitterPedido.send(pedido);
+		emitterPedido.send(pedido);
 		return PratoCarrinho.delete(client, cliente);
 	}
 
