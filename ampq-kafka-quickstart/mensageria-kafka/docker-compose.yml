@@ -1,0 +1,33 @@
+version: "3.7"
+
+services: 
+  #Dependência do Kafka
+  zookeeper:
+    container_name: zookeeper_container
+    image: debezium/zookeeper:1.6.1.Final
+    ports:
+     - 2181:2181
+     - 2888:2888
+     - 3888:3888
+  
+  kafka:
+    container_name: kafka_container
+    image: debezium/kafka:1.6.1.Final
+    ports:
+     - 9092:9092
+    links:
+     - zookeeper
+    environment:
+     - ZOOKEEPER_CONNECT=zookeeper:2181    
+     
+  #Interface Web para Kafka
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "8087:8087"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=localhost:2181

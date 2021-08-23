@@ -75,7 +75,7 @@ services:
   #Dependência do Kafka
   zookeeper:
     container_name: zookeeper_container
-    image: debezium/zookeeper:1.6.1.Final
+    image: debezium/zookeeper:1.1
     ports:
      - 2181:2181
      - 2888:2888
@@ -83,7 +83,7 @@ services:
   
   kafka:
     container_name: kafka_container
-    image: debezium/kafka:1.6.1.Final
+    image: debezium/kafka:1.1
     ports:
      - 9092:9092
     links:
@@ -94,7 +94,7 @@ services:
   #Interface Web para Kafka
   kafdrop:
     container_name: kafdrop_container
-    image: obsidiandynamics/kafdrop:3.27.0
+    image: obsidiandynamics/kafdrop:3.24.0
     environment:
        KAFKA_BROKERCONNECT: kafka:9092
     ports:
