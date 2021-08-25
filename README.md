@@ -60,3 +60,7 @@
 				- Crud Implementing jdbc and multiny
 				- Testing with TestContainers, using multiny	
 				- Working with assyncronous messages with Artemis MQ
+			
+			Microservice 3
+				- Working with Kakfa
+				- Working with Microprofile Spec
